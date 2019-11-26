@@ -10,11 +10,11 @@ exports.login = async function(ctx) {
   const { email, password } = ctx.request.body;
   const user = await TBUser.findOne({ where: { email } });
   const md5Pwd = getMD5(password);
-  if (user && user.password !== md5Pwd) {
+  if (!(user && user.password === md5Pwd)) {
     throw new LoginException(errorInfo.MatchedError)
   }
   ctx.body = {
-    code: 0,
+    errorCode: 0,
     message: '登录成功'
   }
 };
@@ -32,7 +32,29 @@ exports.getVerificationCode = async function(ctx) {
   await sender.sendMail({subject: '登录验证码', to: email, text: code});
 
   ctx.body = {
-    code: 0,
+    errorCode: 0,
     message: '获取成功'
+  }
+};
+
+// 邮箱验证码登录
+exports.verificationCodeLogin = async function(ctx) {
+  const { email, code } = ctx.request.body;
+  if (!email || !code) {
+    throw new ParameterException(errorInfo.MissingRequiredParams)
+  }
+  const user = await TBUser.findOne({ where: { email } });
+  if (!user) {
+    throw new LoginException(errorInfo.NoUserError);
+  }
+  const redisCache = new RedisCache();
+  const redisCode = await redisCache.get(`email:login:${email}`);
+  if (redisCode !== code) {
+    throw new LoginException(errorInfo.VerificationCodeError)
+  }
+
+  ctx.body = {
+    errorCode: 0,
+    message: '登录成功'
   }
 };

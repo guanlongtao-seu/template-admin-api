@@ -11,7 +11,7 @@ const handleApiError = async (ctx, next) => {
         console.log(now, err)
         if (err instanceof HttpException) {
             ctx.body = {
-                error_code: err.errorCode,
+                errorCode: err.errorCode,
                 message: err.message,
                 request: `${ctx.method} ${ctx.path}`
             };

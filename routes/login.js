@@ -5,5 +5,6 @@ router.prefix('/api')
 
 router.post('/login', apiInstance.login);
 router.get('/getVerificationCode', apiInstance.getVerificationCode);
+router.post('/verificationCodeLogin', apiInstance.verificationCodeLogin);
 
 module.exports = router

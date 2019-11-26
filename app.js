@@ -1,20 +1,29 @@
-const Koa = require('koa')
-const app = new Koa()
+const Koa = require('koa');
+const app = new Koa();
 
-const bodyparser = require('koa-bodyparser')
-const logger = require('koa-logger')
+const bodyparser = require('koa-bodyparser');
+const logger = require('koa-logger');
+const cors = require('koa2-cors');
 
-const InitManager = require('./core/init')
+const InitManager = require('./core/init');
 
 
-const errorHandler = require('./middlewares/excepttion')
+const errorHandler = require('./middlewares/excepttion');
 // 全局异常处理
-app.use(errorHandler)
+app.use(errorHandler);
+app.use(cors({
+  origin: function (ctx) {
+    return ctx.get('Origin')
+  },
+  credentials: true,
+  maxAge: 60,
+  allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
+}));
 
 // middlewares
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
-}))
+}));
 
 // app.use(json())
 // app.use(logger())

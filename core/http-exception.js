@@ -5,6 +5,19 @@ class HttpException extends Error {
     this.code = data.code || 200;
     this.message = data.message || ''
   }
+
+  /**
+   *
+   * @returns {{code: (*|number), errorCode: (*|number), message: string}}
+   * 这里要重写 Error类的 toJSON 方法不然axios响应拦截器拦截不到错误响应
+   */
+  toJSON() {
+    return {
+      code: this.code,
+      errorCode: this.errorCode,
+      message: this.message
+    }
+  }
 }
 
 // 登录异常类
