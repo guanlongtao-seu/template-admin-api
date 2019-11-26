@@ -3,15 +3,20 @@ const { TBUser } = require('../db/table');
 const errorInfo = require('../constant/errorInfo');
 const EmailSender = require('../libs/EmailSender');
 const RedisCache = require('../libs/RedisCache');
-const { getFourDigitCode } = require('../libs/Utils');
+const { getFourDigitCode, getMD5 } = require('../libs/Utils');
 
+// 密码登录
 exports.login = async function(ctx) {
-  await TBUser.findOne({
-    where: {
-      id: 1
-    }
-  });
-  throw new LoginException(errorInfo.MatchedError)
+  const { email, password } = ctx.request.body;
+  const user = await TBUser.findOne({ where: { email } });
+  const md5Pwd = getMD5(password);
+  if (user && user.password !== md5Pwd) {
+    throw new LoginException(errorInfo.MatchedError)
+  }
+  ctx.body = {
+    code: 0,
+    message: '登录成功'
+  }
 };
 
 // 获取邮箱验证码
