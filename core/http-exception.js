@@ -42,4 +42,4 @@ module.exports = {
   HttpException,
   LoginException,
   ParameterException
-}
+};

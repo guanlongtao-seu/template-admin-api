@@ -1,4 +1,4 @@
-const errorInfo = {
+const ErrorInfo = {
   // 未知错误
   UnknownError: { errorCode: -1, message: '服务器出现未知问题'},
   // 成功
@@ -17,6 +17,6 @@ const errorInfo = {
   // 参数
   MissingRequiredParams: { errorCode: 30001, message: '必填参数缺失'}
 
-}
+};
 
-module.exports = errorInfo
+module.exports = ErrorInfo;
