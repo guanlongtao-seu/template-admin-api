@@ -1,7 +1,6 @@
 module.exports = {
   env: 'dev',
   dbTemplate: 'mysql://root:71114411@127.0.0.1/db_template',
-  redisSession: 'redis://@127.0.0.1:6379',
   redisData: 'redis://@127.0.0.1:6379',
   EmailSender: {
     host: 'smtp.163.com',

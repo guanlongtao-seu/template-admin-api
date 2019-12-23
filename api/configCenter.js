@@ -1,11 +1,11 @@
 const { TBImage } = require('../db/table');
 const BaseService = require('../service/BaseService');
-const baseArticleService = new BaseService(Image);
+const baseArticleService = new BaseService(TBImage);
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-// 获取文章列表
-exports.list = async function(ctx) {
+// 获取图片列表
+exports.imageList = async function(ctx) {
   let {filter, current, pageSize} = ctx.request.query;
   let {id, remark} = JSON.parse(filter);
   let where = {};
@@ -13,8 +13,10 @@ exports.list = async function(ctx) {
   current = parseInt(current);
   if (!isNaN(parseInt(id))) {
     where['id'] = id;
+  } else {
+    where['id'] = 0;
   }
-  if (title) {
+  if (remark) {
     where['remark'] = {
       [Op.like]: `%${remark}%`
     }
@@ -33,6 +35,7 @@ exports.list = async function(ctx) {
       current,
       pageSize,
       total
+
     }
   }
 };

@@ -1,8 +1,8 @@
 const Router = require('koa-router');
 const router = new Router();
-const apiInstance = require('../api/image');
-router.prefix('/api/image');
+const apiInstance = require('../api/configCenter');
+router.prefix('/api/config');
 
-router.get('/list', apiInstance.list);
+router.get('/imageList', apiInstance.imageList);
 
 module.exports = router;

@@ -35,3 +35,5 @@ exports.TBAccount = require('./tb_account')(dbTemplateInstance, Sequelize);
 
 // 文章
 exports.TBArticle = require('./tb_article')(dbTemplateInstance, Sequelize);
+// 图片
+exports.TBImage = require('./tb_image')(dbTemplateInstance, Sequelize);

@@ -28,4 +28,4 @@ const handleApiError = async (ctx, next) => {
     }
 };
 
-module.exports = handleApiError
+module.exports = handleApiError;

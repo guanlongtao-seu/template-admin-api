@@ -8,7 +8,14 @@ const cors = require('koa2-cors');
 const InitManager = require('./core/init');
 
 
-const errorHandler = require('./middlewares/excepttion');
+const errorHandler = require('./middlewares/Excepttion');
+const session = require("./middlewares/Session");
+
+const RedisStore  = require("./libs/RedisStore");
+
+const {redisSession} = require("./config");
+
+
 // 全局异常处理
 app.use(errorHandler);
 app.use(cors({
@@ -23,6 +30,16 @@ app.use(cors({
 // middlewares
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
+}));
+
+// 使用session中间件
+app.use(session({
+  key      : 'sessionId',
+  maxAge   : 1000 * 3600 * 4,
+  expires  : new Date(Date.now() + 1000 * 3600 * 4),
+  httpOnly : true,
+  overwrite: false,
+  store    : new RedisStore(redisSession)
 }));
 
 // app.use(json())

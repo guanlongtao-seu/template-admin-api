@@ -16,6 +16,13 @@ exports.login = async function(ctx) {
   if (!(account && account.password === md5Pwd)) {
     throw new LoginException(ErrorInfo.MatchedError)
   }
+  ctx.session = {
+    id: account.id,
+    username: account.username,
+    email,
+    phone: account.phone
+  };
+  console.log(ctx.session);
   ctx.body = {
     errorCode: 0,
     message: '登录成功'
@@ -46,6 +53,7 @@ exports.verificationCodeLogin = async function(ctx) {
   if (!email || !code) {
     throw new ParameterException(ErrorInfo.MissingRequiredParams)
   }
+  const filter = { email };
   const account = await baseAccountService.findItemByFilter(filter);
   if (!account) {
     throw new LoginException(ErrorInfo.NoUserError);
@@ -55,9 +63,24 @@ exports.verificationCodeLogin = async function(ctx) {
   if (redisCode !== code) {
     throw new LoginException(ErrorInfo.VerificationCodeError)
   }
-
+  ctx.session = {
+    id: account.id,
+    username: account.username,
+    email,
+    phone: account.phone
+  };
   ctx.body = {
     errorCode: 0,
     message: '登录成功'
   }
+};
+
+// 登录后从session中拿到用户信息
+exports.getAccountInfo = async function(ctx){
+  const account = {id, username, email, phone} = ctx.session;
+  ctx.body = {
+    errorCode: 0,
+    message: '',
+    data: account
+  };
 };
