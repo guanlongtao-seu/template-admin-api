@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const { dbTemplate } = require('../config/dev')
+const Sequelize = require('sequelize');
+const { dbTemplate } = require('../config');
 
 const dbTemplateInstance = new Sequelize(dbTemplate, {
     /**
