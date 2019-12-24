@@ -8,7 +8,7 @@ const cors = require('koa2-cors');
 const InitManager = require('./core/init');
 
 
-const errorHandler = require('./middlewares/Excepttion');
+const errorHandler = require('./middlewares/Exception');
 const session = require("./middlewares/Session");
 
 const RedisStore  = require("./libs/RedisStore");
