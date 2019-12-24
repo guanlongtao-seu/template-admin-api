@@ -6,7 +6,8 @@
     "start": "node bin/www",
     "dev": "cross-env NODE_ENV=dev ./node_modules/.bin/nodemon bin/www",
     "pro": "pm2 start ecosystem.config.js --only pro-api --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-pro": "cross-env NODE_ENV=pro ./node_modules/.bin/nodemon bin/www"
   },
   "dependencies": {
     "cross-env": "^6.0.3",
