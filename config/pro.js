@@ -1,5 +1,5 @@
 module.exports = {
-  env: 'dev',
+  env: 'pro',
   dbTemplate: 'mysql://root:@71114411Seu@111.231.94.127/db_template',
   redisData: 'redis://@111.231.94.127:6379',
   EmailSender: {
