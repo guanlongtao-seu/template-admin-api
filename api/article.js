@@ -7,6 +7,7 @@ const Op = Sequelize.Op;
 // 获取文章列表
 exports.list = async function(ctx) {
   let {filter, current, pageSize} = ctx.request.query;
+  console.log(11111);
   let {id, title} = JSON.parse(filter);
   let where = {};
   pageSize = parseInt(pageSize);
