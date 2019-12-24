@@ -9,7 +9,8 @@ const InitManager = require('./core/init');
 
 
 const errorHandler = require('./middlewares/Exception');
-const session = require("./middlewares/Session");
+const session = require('./middlewares/Session');
+const checker = require('./middlewares/SessionChecker');
 
 const RedisStore  = require("./libs/RedisStore");
 
@@ -41,7 +42,7 @@ app.use(session({
   overwrite: false,
   store    : new RedisStore(redisSession)
 }));
-
+app.use(checker);
 // app.use(json())
 // app.use(logger())
 // app.use(require('koa-static')(__dirname + '/public'))

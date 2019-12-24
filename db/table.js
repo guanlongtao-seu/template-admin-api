@@ -17,7 +17,7 @@ const dbTemplateInstance = new Sequelize(dbTemplate, {
         createdAt: 'created_at',
         updatedAt: 'updated_at'
     }
-})
+});
 // 测试连接代码
 // dbMay.authenticate()
 //  .then(() => {

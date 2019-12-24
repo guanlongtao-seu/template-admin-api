@@ -75,6 +75,15 @@ exports.verificationCodeLogin = async function(ctx) {
   }
 };
 
+// 登出
+exports.logout = async function (ctx) {
+  ctx.session = null;
+  return ctx.body = {
+    errorCode: 0,
+    message: '登出成功'
+  }
+};
+
 // 登录后从session中拿到用户信息
 exports.getAccountInfo = async function(ctx){
   const account = {id, username, email, phone} = ctx.session;
