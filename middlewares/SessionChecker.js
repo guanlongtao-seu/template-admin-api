@@ -1,13 +1,14 @@
 const ErrorInfo = require('../constant/ErrorInfo');
 const {LoginException} = require('../core/http-exception');
 
-// 不需要登录酒客访问的接口列表
+// 不需要登录就可访问的接口列表
 const noLoginPath = new Set([
   '/',
   '/api/login', //登录
   '/api/login/getVerificationCode', //获取邮箱验证码
   '/api/login/verificationCodeLogin', //邮箱验证码登录
-  '/test' //测试接通
+  '/test', //测试接通
+  '/api/article/list'
 ]);
 
 module.exports = async function(ctx, next) {
