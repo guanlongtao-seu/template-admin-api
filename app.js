@@ -16,6 +16,8 @@ const RedisStore  = require("./libs/RedisStore");
 
 const {redisSession} = require("./config");
 
+require('./script');
+
 
 // 全局异常处理
 app.use(errorHandler);
