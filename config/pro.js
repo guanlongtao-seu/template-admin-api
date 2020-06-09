@@ -2,6 +2,7 @@ module.exports = {
   env: 'pro',
   dbTemplate: 'mysql://root:@71114411Seu@111.231.94.127/db_template',
   redisData: 'redis://@111.231.94.127:6379',
+  redisSession: 'redis://@127.0.0.1:6379',
   EmailSender: {
     host: 'smtp.163.com',
     secureConnection: true, // use SSL
